@@ -1,3 +1,7 @@
 = time_card
 
-Description goes here
+動作確認済みのversion
+Redmine 4.1.1
+
+テーブルを作成するためセットアップ時にmigrateしてください
+rake redmine:plugins:migrate RAILS_ENV=production
