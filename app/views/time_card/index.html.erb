@@ -16,14 +16,14 @@
 <% if @todaypunchin.blank? %>
 <%=l(:not_stamped)%>
 <% else %>
-<%= @getMyDateTime(todaypunchin).strftime("%H:%M") %>
+<%= getMyDateTime(@todaypunchin).strftime("%H:%M") %>
 <% end %>
 
 <%=l(:label_punchout)%>
 <% if @todaypunchout.blank? %>
 <%=l(:not_stamped)%>
 <% else %>
-<%= @getMyDateTime(todaypunchout).strftime("%H:%M") %>
+<%= getMyDateTime(@todaypunchout).strftime("%H:%M") %>
 <% end %>
 </div>
 
