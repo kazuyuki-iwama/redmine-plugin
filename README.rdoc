@@ -1,5 +1,7 @@
 = time_card
 
+redmine用の簡易的なタイムカード プラグインです。
+
 動作確認済みのversion
 Redmine 4.1.1
 
