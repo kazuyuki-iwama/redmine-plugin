@@ -1,0 +1,69 @@
+.button{
+  cursor:hand
+}
+table.timecard{
+  border:1px solid #aaaaaa;
+  border-collapse: collapse;
+}
+.today_info{
+  font-size :large;
+}
+.button_come{
+  font-size :large;
+}
+.button_leave{
+  font-size :large;
+}
+.link_paging_prev{
+  font-size :large;
+}
+.link_paging_next{
+  font-size :large;
+}
+.button_edit_submit{
+  font-size :large;
+}
+.button_edit_back{
+  font-size :large;
+}
+table[class="timecard"]  caption {
+  text-align:left;
+  font-size: x-large;
+}
+table[class="timecard"]  td {
+  border:1px solid #aaaaaa;
+  border-collapse: collapse;
+}
+table[class="timecard"]  th {
+  border:1px solid #aaaaaa;
+  border-collapse: collapse;
+}
+.record_today td{
+  color : #dddd00;
+}
+.record_weekday td{
+  color : #000000;
+}
+.record_satday td{
+  color : #0000ff;
+}
+.record_sunday td{
+  color : #ff0000;
+}
+.record_weekday:hover{
+  background-color:#eeeeff;
+}
+.record_satday:hover{
+  background-color:#eeeeff;
+}
+.record_sunday:hover{
+  background-color:#eeeeff;
+}
+.h_day{}
+.h_coming{}
+.h_leaving{}
+.h_remarks{}
+
+td.h_worked{
+  text-align:right;
+}

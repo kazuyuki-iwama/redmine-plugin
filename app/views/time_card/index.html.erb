@@ -1,0 +1,84 @@
+<%= stylesheet_link_tag 'time_card' , :plugin => 'time_card' %>
+
+<h2>
+<%=l(:plugin_title)%>
+<%= form_tag({action: :index}, {method: "get"}) do %>
+<%= select_tag(:user, options_from_collection_for_select(User.where("status=1"), "id" ,"name" ,{:selected => @selectUser}) ,{:onchange => "javascript:this.form.submit();"}) %>
+<% end %>
+</h2>
+
+<%=@errmsg%>
+
+
+<div class="today_info">
+<%= getMyDateTime(Time.now).strftime('%-m/%-d')%>(<%=l(:weekday).split(/\s+/)[getMyDateTime(Time.now).wday]%>) 
+<%=l(:label_punchin)%>
+<% if @todaypunchin.blank? %>
+<%=l(:not_stamped)%>
+<% else %>
+<%= @getMyDateTime(todaypunchin).strftime("%H:%M") %>
+<% end %>
+
+<%=l(:label_punchout)%>
+<% if @todaypunchout.blank? %>
+<%=l(:not_stamped)%>
+<% else %>
+<%= @getMyDateTime(todaypunchout).strftime("%H:%M") %>
+<% end %>
+</div>
+
+<div>
+<% if @todaypunchin.blank? %>
+<%   if @selectUser.to_s == User.current.id.to_s %>
+<%= button_to l(:button_punchin), {:action => 'punchin'}, :method => :post, :class => 'button_punchin' %>
+<%   end %>
+<% end %>
+<% if @todaypunchout.blank? %>
+<%   if @selectUser.to_s == User.current.id.to_s %>
+<%= button_to l(:button_punchout), {:action => 'punchout'}, :method => :post, :class => 'button_punchout' %>
+<%   end %>
+<% end %>
+</div>
+
+<table class="timecard">
+  <caption>
+    <%= link_to '<<', time_card_index_path(:month => @monthprev,:user => @selectUser), :method => :get, :class => 'link_paging_prev' %>
+    <%=@monthcurrent%>
+    <%= link_to '>>', time_card_index_path(:month => @monthnext,:user => @selectUser), :method => :get, :class => 'link_paging_next' %>
+  </caption>
+  <thead>
+    <tr>
+<% if @selectUser.to_s == User.current.id.to_s %>
+      <th class="h_edit"><%=l(:table_title_edit)%></th>
+<% end %>
+      <th class="h_day"><%=l(:table_title_day)%></th>
+      <th class="h_punchin"><%=l(:table_title_punchin)%></th>
+      <th class="h_punchout"><%=l(:table_title_punchout)%></th>
+      <th class="h_hours"><%=l(:table_title_worked)%></th>
+      <th class="h_remarks"><%=l(:table_title_remarks)%></th>
+    </tr>
+  </thead>
+  <tbody>
+<% @timerecords.each do |rec| %>
+<% case rec["day"].strftime("%a") %>
+<% when "Sat" then %>
+    <tr class="record_satday">
+<% when "Sun" then %>
+    <tr class="record_sunday">
+<% else %>
+    <tr class="record_weekday">
+<% end %>
+<% if @selectUser.to_s == User.current.id.to_s %>
+      <td class="h_edit">
+        <%= link_to '' ,time_card_edit_path(:editday => rec["day"].strftime('%Y-%m-%d')), :method => :post ,:class => 'icon icon-edit' %>
+      </td>
+<% end %>
+      <td class="h_day"><%=rec["day"].strftime("%d")%> (<%=l(:weekday).split(/\s+/)[rec["day"].wday]%>)</td>
+      <td class="h_punchin"><%=rec["punchin_tm"].nil? ? "" : getMyDateTime(rec["punchin_tm"]).strftime("%H:%M")%></td>
+      <td class="h_punchout"><%=rec["punchout_tm"].nil? ? "" : getMyDateTime(rec["punchout_tm"]).strftime("%H:%M")%></td>
+      <td class="h_worked"><%=rec["hours"] == 0 ? "" : rec["hours"]%></td>
+      <td class="h_remarks"><%=rec["remarks_tx"]%></td>
+    </tr>
+<% end %>
+  </tbodY>
+</table>

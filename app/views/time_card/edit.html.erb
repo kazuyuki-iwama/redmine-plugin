@@ -1,0 +1,22 @@
+<h2><%=l(:edit_title)%> : <%=getMyDateTime(@editday).strftime('%Y-%m-%d')%></h2>
+<%=@errmsg%>
+
+<%= form_tag("edited", method: "post") do %>
+  <%= hidden_field_tag(:editday, @editday)%>
+  <%= label_tag(:edit_time_punchin, l(:edit_label_punchin)) %>
+  <% if @edittimepunchin.nil? %>
+    <%= time_field_tag(:edit_time_punchin, "",{pattern:"[0-9]{2}:[0-9]{2}" , title:l(:pattern_title_time)}) %>
+  <% else %>
+    <%= time_field_tag(:edit_time_punchin, getMyDateTime(@edittimepunchin).strftime("%H:%M"),{pattern:"[0-9]{2}:[0-9]{2}", title:l(:pattern_title_time)}) %>
+  <% end %>
+  <%= label_tag(:edit_time_punchout, l(:edit_label_punchout)) %>
+  <% if @edittimepunchout.nil? %>
+    <%= time_field_tag(:edit_time_punchout, "",{pattern:"[0-9]{2}:[0-9]{2}", title:l(:pattern_title_time)}) %>
+  <% else %>
+    <%= time_field_tag(:edit_time_punchout, getMyDateTime(@edittimepunchout).strftime("%H:%M"),{pattern:"[0-9]{2}:[0-9]{2}", title:l(:pattern_title_time)}) %>
+  <% end %>
+  <%= label_tag(:edit_remarks, l(:edit_label_remarks)) %>
+  <%= text_field_tag(:edit_remarks, @editremarks ,{size:"30"}) %>
+  <%= submit_tag(l(:edit_button_submit) ,{class:"button_edit_back"}) %>
+<% end %>
+<button class="button_edit_back" onclick="javascript:history.back();"><%=l(:edit_button_back)%></button>
