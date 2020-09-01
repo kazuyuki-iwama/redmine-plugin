@@ -8,4 +8,6 @@ Redmine 4.1.1
 テーブルを作成するためセットアップ時にmigrateしてください
 rake redmine:plugins:migrate RAILS_ENV=production
 
+※タイムゾーンは個人設定のタイムゾーンになります
+
 2020/09/01 CSV出力機能を付けました
