@@ -24,3 +24,4 @@ ja:
   :edit_button_back     : "やめる"
   :edit_time_format_err : " は、時刻として適切ではありません。00:00～23:59を入力してください"
   :require_login_msg    : "タイムカードの操作はログインする必要があります"
+  :link_csv             : "CSV"

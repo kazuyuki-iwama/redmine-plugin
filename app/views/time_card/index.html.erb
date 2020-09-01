@@ -3,7 +3,8 @@
 <h2>
 <%=l(:plugin_title)%>
 <%= form_tag({action: :index}, {method: "get"}) do %>
-<%= select_tag(:user, options_from_collection_for_select(User.where("status=1"), "id" ,"name" ,{:selected => @selectUser}) ,{:onchange => "javascript:this.form.submit();"}) %>
+<%# select_tag(:user, options_from_collection_for_select(User.where("status=1"), "id" ,"name" ,{:selected => @selectUser}) ,{:onchange => "javascript:this.form.submit();"}) %>
+<%= select_tag(:user, options_from_collection_for_select(User.where("status=1").order(:firstname).order(:lastname), "id" ,"name" ,{:selected => @selectUser}) ,{:onchange => "javascript:this.form.submit();"}) %>
 <% end %>
 </h2>
 
@@ -82,3 +83,4 @@
 <% end %>
   </tbodY>
 </table>
+<%= link_to l(:link_csv), time_card_index_path(:format => :csv, :month => @monthcurrent.gsub!("/","-")+"-01", :user => @selectUser) %>

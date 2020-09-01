@@ -15,6 +15,13 @@ class TimeCardController < ApplicationController
     @monthcurrent = selectMonth.strftime('%Y/%-m')
     @monthprev = selectMonth.beginning_of_month.yesterday.strftime('%Y-%m-%d')
     @monthnext = selectMonth.end_of_month.tomorrow.strftime('%Y-%m-%d')
+    respond_to do |format|
+      format.html do
+      end
+      format.csv do
+        send_data render_to_string, filename: selectMonth.strftime('%Y%m')+"_user"+@selectUser+".csv", type: :csv
+      end
+    end
   end
 
   def paging

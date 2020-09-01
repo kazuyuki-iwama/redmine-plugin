@@ -24,3 +24,4 @@ en:
   :edit_button_back     : "cancel"
   :edit_time_format_err : " is not time. Please enter from 00:00 to 23:59"
   :require_login_msg    : "You must be logged in to access TimeCard"
+  :link_csv             : "CSV"
