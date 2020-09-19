@@ -77,7 +77,7 @@
       <td class="h_day"><%=rec["day"].strftime("%d")%> (<%=l(:weekday).split(/\s+/)[rec["day"].wday]%>)</td>
       <td class="h_punchin"><%=rec["punchin_tm"].nil? ? "" : getMyDateTime(rec["punchin_tm"]).strftime("%H:%M")%></td>
       <td class="h_punchout"><%=rec["punchout_tm"].nil? ? "" : getMyDateTime(rec["punchout_tm"]).strftime("%H:%M")%></td>
-      <td class="h_worked"><%=rec["hours"] == 0 ? "" : rec["hours"]%></td>
+      <td class="h_worked"><%=link_to rec["hours"] == 0 ? "" : rec["hours"], time_entries_path(:spent_on => rec["day"].strftime('%Y-%m-%d') , :user_id => @selectUser.to_s)  %></td>
       <td class="h_remarks"><%=rec["remarks_tx"]%></td>
     </tr>
 <% end %>

@@ -1,6 +1,6 @@
 class CreateTimerecards < ActiveRecord::Migration[5.2]
   def change
-    create_table :timecards, primary_key: [:key] do |t|
+    create_table :timecards, if_not_exists: true, primary_key: [:key] do |t|
       t.string :key
       t.date :calender_dt
       t.integer :user_id
